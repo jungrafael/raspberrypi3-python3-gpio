@@ -1,0 +1,4 @@
+RPi.GPIO
+cryptography==3.3
+pyOpenSSL==21.0.0
+balena-sdk

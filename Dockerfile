@@ -1,8 +1,10 @@
-FROM balenalib/raspberrypi3-python:3.6-run
+ARG python_version=3.7
+FROM --platform=linux/arm/v7 balenalib/raspberrypi3-python:${python_version}-run
 
 RUN apt update && apt upgrade
-RUN apt install build-essential libffi-dev libssl-dev
-RUN pip install RPi.GPIO
-RUN pip install balena-sdk
-RUN apt purge build-essential
-RUN apt autoremove
+RUN apt install build-essential libffi-dev libssl-dev python3-dev cargo
+
+RUN pip install --upgrade pip
+RUN pip install RPi.GPIO pyOpenSSL==21.0.0 balena-sdk
+
+RUN apt purge build-essential python3-dev && apt autoremove
